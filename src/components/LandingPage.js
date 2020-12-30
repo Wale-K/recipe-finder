@@ -23,9 +23,7 @@ const Section = styled.div`
 `;
 
 const Title = styled.h1`
-  text-align: center;
   margin: 0;
-
   color: ${colourPalette.primary};
 `;
 
