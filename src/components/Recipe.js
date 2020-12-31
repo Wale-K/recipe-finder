@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colourPalette } from "../utilities";
+import axios from "axios";
 
 const RecipeContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
@@ -20,25 +21,32 @@ const RecipeContainer = styled.div`
 
 export class Recipe extends React.Component {
   state = {
-    allIngredients: [
-      { ingredientName: "Chocolate" },
-      { ingredientName: "Flour" },
-      { ingredientName: "Eggs" },
-    ],
+    allIngredients: "ham",
+    allRecipes: [],
   };
 
-  handleUpdateIngredient(event, index) {
-    this.setState((prevState) => {
-      return {
-        allIngredients: [
-          ...prevState.allIngredients,
-          (prevState.allIngredients[index].ingredientName = event),
-        ],
-      };
+  handleUpdateIngredients(event) {
+    this.setState({
+      allIngredients: event.target.value,
     });
   }
 
+  test = () => {
+    if (this.state.allIngredients !== null) {
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=a65ef70f2e914cbe86de0f39212ff030&ingredients=${this.state.allIngredients}`
+        )
+        .then((response) => {
+          this.setState({
+            allRecipes: response.data,
+          });
+        });
+    }
+  };
+
   render() {
+    console.log(this.state.allRecipes);
     return (
       <RecipeContainer
         toggleDisplay={this.props.displayRecipe ? "flex" : "none"}
@@ -47,17 +55,16 @@ export class Recipe extends React.Component {
           Need a brief refresher? Click here to go back to the instructions.
         </span>
         <div>
-          {this.state.allIngredients.map((ingredient, index) => {
-            return (
-              <input
-                key={ingredient.ingredientName}
-                value={ingredient.ingredientName}
-                onChange={() => this.handleUpdateIngredient.bind(this)}
-              />
-            );
-          })}
-          <button>Use these ingredients!</button>
+          <input
+            value={this.state.allIngredients}
+            onChange={this.handleUpdateIngredients.bind(this)}
+          />
+
+          <button onClick={this.test}>Use these ingredients!</button>
         </div>
+        {this.state.allRecipes.map((recipe) => {
+          return <p>{recipe.title}</p>;
+        })}
       </RecipeContainer>
     );
   }
