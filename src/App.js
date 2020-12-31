@@ -4,7 +4,15 @@ import { LandingPage } from "./components/LandingPage";
 import { Recipe } from "./components/Recipe";
 
 class App extends React.Component {
-  state = { displayLandingPage: true, displayRecipe: false };
+  state = {
+    displayLandingPage: false,
+    displayRecipe: true,
+    allIngredients: [
+      { ingredientName: "Chocolate" },
+      { ingredientName: "Flour" },
+      { ingredientName: "Eggs" },
+    ],
+  };
 
   handleSkipInstructions = () => {
     this.setState((prevState) => {
@@ -14,6 +22,11 @@ class App extends React.Component {
       };
     });
   };
+
+  // handleAddIngredient = () => {
+  //   this.state.ingredients.push("");
+  //   console.log(this.state.ingredients.length);
+  // };
 
   render() {
     return (

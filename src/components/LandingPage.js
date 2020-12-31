@@ -5,8 +5,11 @@ import { colourPalette, rightArrow, leftArrow } from "../utilities";
 const Section = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
   width: 100%;
+  height: 70vh;
+  background-color: pink;
   svg {
     width: 10vw;
     height: 5vh;
@@ -36,17 +39,13 @@ const LandingPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
   background-color: ${colourPalette.background};
-  height: 90vh;
+  height: 100vh;
   padding: 2rem;
   span {
     color: blue;
     :hover {
       cursor: pointer;
     }
-  }
-  > div:first-child {
-    margin-top: 10vh;
-    background-color: pink;
   }
 `;
 
@@ -106,7 +105,6 @@ export class LandingPage extends React.Component {
       <LandingPageContainer
         toggleDisplay={this.props.displayLandingPage ? "flex" : "none"}
       >
-        <div />
         <Section
           toggleDisplay={this.state.introDisplay ? "flex" : "none"}
           align="flex-end"
@@ -126,7 +124,10 @@ export class LandingPage extends React.Component {
           <p>Otherwise, lets start by finding out your name.</p>
           <svg onClick={this.handleToggleDisplay}>{rightArrow}</svg>
         </Section>
-        <Section toggleDisplay={this.state.middleDisplay ? "flex" : "none"}>
+        <Section
+          toggleDisplay={this.state.middleDisplay ? "flex" : "none"}
+          justify="space-between;"
+        >
           <input
             placeholder="What's your name?"
             value={this.state.userName}
