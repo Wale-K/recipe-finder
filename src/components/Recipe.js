@@ -7,6 +7,13 @@ const AllRecipesContainer = styled.div`
   display: ${(props) => props.display};
 `;
 
+const RecipeTitleWithImage = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  border: solid 5px black;
+`;
+
 const CurrentRecipeContainer = styled.div`
   display: ${(props) => props.display};
   flex-direction: column;
@@ -95,18 +102,20 @@ export class Recipe extends React.Component {
             Use these ingredients!
           </button>
         </div>
-        {this.state.allRecipes.map((recipe, index) => {
-          return (
-            <AllRecipesContainer
-              display={this.state.displayCurrentRecipe ? "none" : "flex"}
-              //   onClick={() => this.handleRenderRecipe(index)}
-              onClick={() => this.handleGetRecipeById(recipe.id)}
-            >
-              <p>{recipe.title}</p>
-              {/* <img src={recipe.image} alt={recipe.title} /> */}
-            </AllRecipesContainer>
-          );
-        })}
+        <AllRecipesContainer
+          display={this.state.displayCurrentRecipe ? "none" : "flex"}
+        >
+          {this.state.allRecipes.map((recipe, index) => {
+            return (
+              <RecipeTitleWithImage
+                onClick={() => this.handleGetRecipeById(recipe.id)}
+              >
+                <img src={recipe.image} alt={recipe.title} />
+                <p>{recipe.title}</p>
+              </RecipeTitleWithImage>
+            );
+          })}
+        </AllRecipesContainer>
         <CurrentRecipeContainer
           display={this.state.displayCurrentRecipe ? "flex" : "none"}
         >

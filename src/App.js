@@ -5,13 +5,8 @@ import { Recipe } from "./components/Recipe";
 
 class App extends React.Component {
   state = {
-    displayLandingPage: false,
-    displayRecipe: true,
-    allIngredients: [
-      { ingredientName: "Chocolate" },
-      { ingredientName: "Flour" },
-      { ingredientName: "Eggs" },
-    ],
+    displayLandingPage: true,
+    displayRecipe: false,
   };
 
   handleSkipInstructions = () => {
@@ -22,11 +17,6 @@ class App extends React.Component {
       };
     });
   };
-
-  // handleAddIngredient = () => {
-  //   this.state.ingredients.push("");
-  //   console.log(this.state.ingredients.length);
-  // };
 
   render() {
     return (

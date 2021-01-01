@@ -1,6 +1,10 @@
 export const colourPalette = {
-  background: "#009999",
+  primaryText: "#017d18",
+  secondaryText: "#386737",
+  text: "#3a3a3a",
+  background: "#eee",
   primary: "#993d00",
+  highlight: "#cde9bf",
 };
 
 export const rightArrow = (

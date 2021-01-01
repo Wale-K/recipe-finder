@@ -6,28 +6,26 @@ const Section = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto;
-  width: 100%;
-  height: 70vh;
-  background-color: pink;
+  margin: ${(props) => props.margin};
+  padding: 2rem;
+  height: calc(100vh - 2rem);
+
   svg {
     width: 10vw;
     height: 5vh;
     align-self: ${(props) => props.align};
+    color: ${colourPalette.secondaryText};
   }
 
   input {
     width: 80vw;
     margin-bottom: 2rem;
   }
-
-  button {
-  }
 `;
 
 const Title = styled.h1`
-  margin: 0;
-  color: ${colourPalette.primary};
+  color: ${colourPalette.primaryText};
+  background-color: ${colourPalette.background};
 `;
 
 const Arrows = styled.div`
@@ -37,12 +35,13 @@ const Arrows = styled.div`
 
 const LandingPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
+
   flex-direction: column;
   background-color: ${colourPalette.background};
   height: 100vh;
-  padding: 2rem;
+
   span {
-    color: blue;
+    color: ${colourPalette.secondaryText};
     :hover {
       cursor: pointer;
     }
@@ -51,46 +50,23 @@ const LandingPageContainer = styled.div`
 
 export class LandingPage extends React.Component {
   state = {
-    userName: "Wale",
+    userName: "",
     introDisplay: true,
-    middleDisplay: false,
-    endDisplay: false,
   };
 
   handleToggleDisplay = () => {
     this.setState((prevState) => {
-      if (prevState.introDisplay === true) {
-        return {
-          introDisplay: false,
-          middleDisplay: true,
-        };
-      } else if (
-        prevState.middleDisplay === true &&
-        this.state.userName !== ""
-      ) {
-        return {
-          middleDisplay: false,
-          endDisplay: true,
-        };
-      }
+      return {
+        introDisplay: !prevState.introDisplay,
+      };
     });
   };
 
   revertBackAPage = () => {
     this.setState((prevState) => {
-      if (prevState.middleDisplay === true) {
-        return {
-          introDisplay: true,
-          middleDisplay: false,
-          endDisplay: false,
-        };
-      } else if (prevState.endDisplay === true) {
-        return {
-          introDisplay: false,
-          middleDisplay: true,
-          endDisplay: false,
-        };
-      }
+      return {
+        introDisplay: !prevState.introDisplay,
+      };
     });
   };
 
@@ -108,6 +84,7 @@ export class LandingPage extends React.Component {
         <Section
           toggleDisplay={this.state.introDisplay ? "flex" : "none"}
           align="flex-end"
+          background="linear-gradient(30deg, #465e4f, #384b3f)"
         >
           <Title>Recipe Finder</Title>
           <p>Hello friend.</p>
@@ -122,29 +99,25 @@ export class LandingPage extends React.Component {
             </span>
           </p>
           <p>Otherwise, lets start by finding out your name.</p>
-          <svg onClick={this.handleToggleDisplay}>{rightArrow}</svg>
-        </Section>
-        <Section
-          toggleDisplay={this.state.middleDisplay ? "flex" : "none"}
-          justify="space-between;"
-        >
           <input
             placeholder="What's your name?"
             value={this.state.userName}
             onChange={this.handleChangeUserName.bind(this)}
           />
-          <Arrows>
-            <svg onClick={this.revertBackAPage}>{leftArrow}</svg>
-            <svg onClick={this.handleToggleDisplay}>{rightArrow}</svg>
-          </Arrows>
+          <svg onClick={this.handleToggleDisplay}>{rightArrow}</svg>
         </Section>
-        <Section toggleDisplay={this.state.endDisplay ? "flex" : "none"}>
-          <p>Your name is "{this.state.userName}"? That's a cool name!</p>
+
+        <Section toggleDisplay={this.state.introDisplay ? "none" : "flex"}>
           <p>
-            Well {this.state.userName}, to use this site all you need to do is
-            enter your ingredients in the input fields on the next page. Please
-            seperate your ingredients with commas. There's an exmple you can see
-            on the next page.
+            {this.state.userName
+              ? `Your name is "${this.state.userName}"? ? That's a cool name!`
+              : "You'd prefer not so share your name? That's OK."}
+          </p>
+          <p>
+            Well {this.state.userName ? this.state.userName : "friend"}, to use
+            this site all you need to do is enter your ingredients in the input
+            fields on the next page. Please seperate your ingredients with
+            commas. There's an exmple you can see on the next page.
           </p>
           <p>
             Once you do that click search and you'll be shown some recipes if
