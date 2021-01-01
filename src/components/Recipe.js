@@ -3,12 +3,19 @@ import styled from "styled-components";
 import { colourPalette } from "../utilities";
 import axios from "axios";
 
+const AllRecipesContainer = styled.div`
+  display: ${(props) => props.display};
+`;
+
+const CurrentRecipeContainer = styled.div`
+  display: ${(props) => props.display};
+`;
+
 const RecipeContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
-  height: 100vh;
   background-color: ${colourPalette.primary};
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem;
 
   span {
@@ -21,8 +28,10 @@ const RecipeContainer = styled.div`
 
 export class Recipe extends React.Component {
   state = {
-    allIngredients: "ham",
+    allIngredients: "",
     allRecipes: [],
+    currentRecipe: [],
+    displayCurrentRecipe: false,
   };
 
   handleUpdateIngredients(event) {
@@ -31,7 +40,7 @@ export class Recipe extends React.Component {
     });
   }
 
-  test = () => {
+  handleGetRecipes = () => {
     if (this.state.allIngredients !== null) {
       axios
         .get(
@@ -45,8 +54,20 @@ export class Recipe extends React.Component {
     }
   };
 
+  handleRenderRecipe = (arg) => {
+    this.setState({
+      currentRecipe: this.state.allRecipes[arg],
+      displayCurrentRecipe: true,
+    });
+  };
+
+  handleBackToRecipes = () => {
+    this.setState({
+      displayCurrentRecipe: false,
+    });
+  };
+
   render() {
-    console.log(this.state.allRecipes);
     return (
       <RecipeContainer
         toggleDisplay={this.props.displayRecipe ? "flex" : "none"}
@@ -58,13 +79,30 @@ export class Recipe extends React.Component {
           <input
             value={this.state.allIngredients}
             onChange={this.handleUpdateIngredients.bind(this)}
+            placeholder="Ham, Cheese"
           />
 
-          <button onClick={this.test}>Use these ingredients!</button>
+          <button onClick={this.handleGetRecipes}>
+            Use these ingredients!
+          </button>
         </div>
-        {this.state.allRecipes.map((recipe) => {
-          return <p>{recipe.title}</p>;
+        {this.state.allRecipes.map((recipe, index) => {
+          return (
+            <AllRecipesContainer
+              display={this.state.displayCurrentRecipe ? "none" : "flex"}
+              onClick={() => this.handleRenderRecipe(index)}
+            >
+              <p>{recipe.title}</p>
+              {/* <img src={recipe.image} alt={recipe.title} /> */}
+            </AllRecipesContainer>
+          );
         })}
+        <CurrentRecipeContainer
+          display={this.state.displayCurrentRecipe ? "flex" : "none"}
+        >
+          {this.state.currentRecipe.title}
+          <button onClick={this.handleBackToRecipes}>Back to recipes</button>
+        </CurrentRecipeContainer>
       </RecipeContainer>
     );
   }

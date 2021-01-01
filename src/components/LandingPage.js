@@ -142,7 +142,9 @@ export class LandingPage extends React.Component {
           <p>Your name is "{this.state.userName}"? That's a cool name!</p>
           <p>
             Well {this.state.userName}, to use this site all you need to do is
-            enter your ingredients in the input fields on the next page.
+            enter your ingredients in the input fields on the next page. Please
+            seperate your ingredients with commas. There's an exmple you can see
+            on the next page.
           </p>
           <p>
             Once you do that click search and you'll be shown some recipes if
