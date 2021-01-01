@@ -9,6 +9,7 @@ const AllRecipesContainer = styled.div`
 
 const CurrentRecipeContainer = styled.div`
   display: ${(props) => props.display};
+  flex-direction: column;
 `;
 
 const RecipeContainer = styled.div`
@@ -30,7 +31,7 @@ export class Recipe extends React.Component {
   state = {
     allIngredients: "",
     allRecipes: [],
-    currentRecipe: [],
+    currentRecipe: {},
     displayCurrentRecipe: false,
   };
 
@@ -49,16 +50,18 @@ export class Recipe extends React.Component {
         .then((response) => {
           this.setState({
             allRecipes: response.data,
+            displayCurrentRecipe: false,
           });
         });
     }
   };
 
-  handleRenderRecipe = (arg) => {
+  handleRenderRecipe = (index) => {
     this.setState({
-      currentRecipe: this.state.allRecipes[arg],
+      currentRecipe: this.state.allRecipes[index],
       displayCurrentRecipe: true,
     });
+    console.log(this.state.allRecipes);
   };
 
   handleBackToRecipes = () => {
@@ -75,6 +78,7 @@ export class Recipe extends React.Component {
         <span onClick={this.props.skipInstructions}>
           Need a brief refresher? Click here to go back to the instructions.
         </span>
+
         <div>
           <input
             value={this.state.allIngredients}
@@ -102,6 +106,17 @@ export class Recipe extends React.Component {
         >
           {this.state.currentRecipe.title}
           <button onClick={this.handleBackToRecipes}>Back to recipes</button>
+          <p>You'll need:</p>
+          {this.state.currentRecipe.missedIngredients
+            ? this.state.currentRecipe.missedIngredients.map((ingredient) => {
+                return <p>{ingredient.original}</p>;
+              })
+            : ""}
+          {this.state.currentRecipe.usedIngredients
+            ? this.state.currentRecipe.usedIngredients.map((ingredient) => {
+                return <p>{ingredient.original}</p>;
+              })
+            : ""}
         </CurrentRecipeContainer>
       </RecipeContainer>
     );
