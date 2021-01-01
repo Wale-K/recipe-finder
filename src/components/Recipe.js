@@ -56,12 +56,17 @@ export class Recipe extends React.Component {
     }
   };
 
-  handleRenderRecipe = (index) => {
-    this.setState({
-      currentRecipe: this.state.allRecipes[index],
-      displayCurrentRecipe: true,
-    });
-    console.log(this.state.allRecipes);
+  handleGetRecipeById = (recipeId) => {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=a65ef70f2e914cbe86de0f39212ff030&includeNutrition=true.`
+      )
+      .then((response) => {
+        this.setState({
+          currentRecipe: response.data,
+          displayCurrentRecipe: true,
+        });
+      });
   };
 
   handleBackToRecipes = () => {
@@ -94,7 +99,8 @@ export class Recipe extends React.Component {
           return (
             <AllRecipesContainer
               display={this.state.displayCurrentRecipe ? "none" : "flex"}
-              onClick={() => this.handleRenderRecipe(index)}
+              //   onClick={() => this.handleRenderRecipe(index)}
+              onClick={() => this.handleGetRecipeById(recipe.id)}
             >
               <p>{recipe.title}</p>
               {/* <img src={recipe.image} alt={recipe.title} /> */}
@@ -107,13 +113,8 @@ export class Recipe extends React.Component {
           {this.state.currentRecipe.title}
           <button onClick={this.handleBackToRecipes}>Back to recipes</button>
           <p>You'll need:</p>
-          {this.state.currentRecipe.missedIngredients
-            ? this.state.currentRecipe.missedIngredients.map((ingredient) => {
-                return <p>{ingredient.original}</p>;
-              })
-            : ""}
-          {this.state.currentRecipe.usedIngredients
-            ? this.state.currentRecipe.usedIngredients.map((ingredient) => {
+          {this.state.currentRecipe.extendedIngredients
+            ? this.state.currentRecipe.extendedIngredients.map((ingredient) => {
                 return <p>{ingredient.original}</p>;
               })
             : ""}
