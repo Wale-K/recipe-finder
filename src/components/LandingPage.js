@@ -108,11 +108,9 @@ export class LandingPage extends React.Component {
         </Section>
 
         <Section toggleDisplay={this.state.introDisplay ? "none" : "flex"}>
-          <p>
-            {this.state.userName
-              ? `Your name is "${this.state.userName}"? ? That's a cool name!`
-              : "You'd prefer not so share your name? That's OK."}
-          </p>
+          {this.state.userName && (
+            <p>Your name is "{this.state.userName}"? That's a cool name!</p>
+          )}
           <p>
             Well {this.state.userName ? this.state.userName : "friend"}, to use
             this site all you need to do is enter your ingredients in the input

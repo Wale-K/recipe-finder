@@ -22,12 +22,13 @@ const CurrentRecipeContainer = styled.div`
 const RecipeContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
-  background-color: ${colourPalette.primary};
+  background-color: ${colourPalette.highlight};
   min-height: 100vh;
   padding: 2rem;
 
   span {
-    color: blue;
+    color: ${colourPalette.secondaryText};
+    margin-bottom: 2rem;
     :hover {
       cursor: pointer;
     }
