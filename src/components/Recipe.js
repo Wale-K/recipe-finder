@@ -5,13 +5,30 @@ import axios from "axios";
 
 const AllRecipesContainer = styled.div`
   display: ${(props) => props.display};
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const RecipeTitleWithImage = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: pink;
-  border: solid 5px black;
+  background-color: ${colourPalette.background};
+
+  width: 60vw;
+  margin: 1rem 0;
+  img {
+    width: 100%;
+  }
+  p {
+    padding: 1rem;
+    font-weight: bolder;
+  }
+  :hover {
+    p {
+      text-decoration: underline;
+      color: ${colourPalette.primaryText};
+    }
+  }
 `;
 
 const CurrentRecipeContainer = styled.div`
