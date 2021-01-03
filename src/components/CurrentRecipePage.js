@@ -11,8 +11,9 @@ export const CurrentRecipePage = (props) => {
     <CurrentRecipeContainer
       display={props.displayCurrentRecipe ? "flex" : "none"}
     >
-      {props.currentRecipe.title}
       <button onClick={props.backToRecipes}>Back to recipes</button>
+      <p>{props.currentRecipe.title}</p>
+
       <p>You'll need:</p>
       {props.currentRecipe.extendedIngredients
         ? props.currentRecipe.extendedIngredients.map((ingredient) => {

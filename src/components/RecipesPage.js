@@ -32,10 +32,10 @@ const RecipeTitleWithImage = styled.div`
   }
 `;
 
-// const CurrentRecipeContainer = styled.div`
-//   display: ${(props) => props.display};
-//   flex-direction: column;
-// `;
+const IngredientsSearchDiv = styled.div`
+  display: ${(props) => props.display};
+  flex-direction: column;
+`;
 
 const RecipesPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
@@ -106,21 +106,23 @@ export class RecipesPage extends React.Component {
       <RecipesPageContainer
         toggleDisplay={this.props.displayRecipe ? "flex" : "none"}
       >
-        <span onClick={this.props.skipInstructions}>
-          Need a brief refresher? Click here to go back to the instructions.
-        </span>
-
-        <div>
-          <input
-            value={this.state.allIngredients}
-            onChange={this.handleUpdateIngredients.bind(this)}
-            placeholder="Ham, Cheese"
-          />
-
-          <button onClick={this.handleGetRecipes}>
-            Use these ingredients!
-          </button>
-        </div>
+        <IngredientsSearchDiv
+          display={this.state.displayCurrentRecipe ? "none" : "flex"}
+        >
+          <span onClick={this.props.skipInstructions}>
+            Need a brief refresher? Click here to go back to the instructions.
+          </span>
+          <div>
+            <input
+              value={this.state.allIngredients}
+              onChange={this.handleUpdateIngredients.bind(this)}
+              placeholder="Ham, Cheese"
+            />
+            <button onClick={this.handleGetRecipes}>
+              Use these ingredients!
+            </button>
+          </div>
+        </IngredientsSearchDiv>
         <AllRecipesContainer
           display={this.state.displayCurrentRecipe ? "none" : "flex"}
         >
