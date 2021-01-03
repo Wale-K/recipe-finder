@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colourPalette } from "../utilities";
+import { CurrentRecipePage } from "./CurrentRecipePage";
 import axios from "axios";
 
 const AllRecipesContainer = styled.div`
@@ -31,12 +32,12 @@ const RecipeTitleWithImage = styled.div`
   }
 `;
 
-const CurrentRecipeContainer = styled.div`
-  display: ${(props) => props.display};
-  flex-direction: column;
-`;
+// const CurrentRecipeContainer = styled.div`
+//   display: ${(props) => props.display};
+//   flex-direction: column;
+// `;
 
-const RecipeContainer = styled.div`
+const RecipesPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
   background-color: ${colourPalette.highlight};
@@ -52,7 +53,7 @@ const RecipeContainer = styled.div`
   }
 `;
 
-export class Recipe extends React.Component {
+export class RecipesPage extends React.Component {
   state = {
     allIngredients: "",
     allRecipes: [],
@@ -102,7 +103,7 @@ export class Recipe extends React.Component {
 
   render() {
     return (
-      <RecipeContainer
+      <RecipesPageContainer
         toggleDisplay={this.props.displayRecipe ? "flex" : "none"}
       >
         <span onClick={this.props.skipInstructions}>
@@ -134,19 +135,12 @@ export class Recipe extends React.Component {
             );
           })}
         </AllRecipesContainer>
-        <CurrentRecipeContainer
-          display={this.state.displayCurrentRecipe ? "flex" : "none"}
-        >
-          {this.state.currentRecipe.title}
-          <button onClick={this.handleBackToRecipes}>Back to recipes</button>
-          <p>You'll need:</p>
-          {this.state.currentRecipe.extendedIngredients
-            ? this.state.currentRecipe.extendedIngredients.map((ingredient) => {
-                return <p>{ingredient.original}</p>;
-              })
-            : ""}
-        </CurrentRecipeContainer>
-      </RecipeContainer>
+        <CurrentRecipePage
+          displayCurrentRecipe={this.state.displayCurrentRecipe}
+          backToRecipes={this.handleBackToRecipes}
+          currentRecipe={this.state.currentRecipe}
+        />
+      </RecipesPageContainer>
     );
   }
 }

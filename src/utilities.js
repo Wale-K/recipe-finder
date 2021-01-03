@@ -1,7 +1,6 @@
 export const colourPalette = {
   primaryText: "#386737",
   secondaryText: "#017d18",
-
   text: "#3a3a3a",
   background: "#eee",
   primary: "#993d00",

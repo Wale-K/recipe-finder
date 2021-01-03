@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { LandingPage } from "./components/LandingPage";
-import { Recipe } from "./components/Recipe";
+import { RecipesPage } from "./components/RecipesPage";
 
 class App extends React.Component {
   state = {
@@ -25,7 +25,7 @@ class App extends React.Component {
           displayLandingPage={this.state.displayLandingPage}
           skipInstructions={this.handleSkipInstructions}
         />
-        <Recipe
+        <RecipesPage
           displayRecipe={this.state.displayRecipe}
           skipInstructions={this.handleSkipInstructions}
         />
