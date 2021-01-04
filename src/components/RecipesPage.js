@@ -25,6 +25,7 @@ const RecipeTitleWithImage = styled.div`
     font-weight: bolder;
   }
   :hover {
+    cursor: pointer;
     p {
       text-decoration: underline;
       color: ${colourPalette.primaryText};
@@ -133,6 +134,7 @@ export class RecipesPage extends React.Component {
               >
                 <img src={recipe.image} alt={recipe.title} />
                 <p>{recipe.title}</p>
+                {console.log(recipe)}
               </RecipeTitleWithImage>
             );
           })}

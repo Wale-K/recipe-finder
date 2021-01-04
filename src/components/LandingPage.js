@@ -46,6 +46,16 @@ const LandingPageContainer = styled.div`
       cursor: pointer;
     }
   }
+
+  @media only screen and (min-width: 768px) {
+    ${Section} {
+      padding: 4rem;
+      height: calc(100vh - 4rem);
+    }
+    input {
+      width: 40vw;
+    }
+  }
 `;
 
 export class LandingPage extends React.Component {
