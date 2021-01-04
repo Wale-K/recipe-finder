@@ -133,7 +133,7 @@ export class RecipesPage extends React.Component {
         <AllRecipesContainer
           display={this.state.displayCurrentRecipe ? "none" : "flex"}
         >
-          {this.state.allRecipes.map((recipe, index) => {
+          {this.state.allRecipes.map((recipe) => {
             return (
               <RecipeTitleWithImage
                 onClick={() => this.handleGetRecipeById(recipe.id)}
@@ -149,6 +149,7 @@ export class RecipesPage extends React.Component {
           backToRecipes={this.handleBackToRecipes}
           currentRecipe={this.state.currentRecipe}
           allRecipes={this.state.allRecipes}
+          getRecipeById={this.handleGetRecipeById}
         />
       </RecipesPageContainer>
     );

@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { colourPalette } from "../utilities";
 
 const Line = styled.div`
-  width: 100%;
+  width: 95%;
   height: 2px;
   background-color: ${colourPalette.primaryText};
+  margin: 0 auto;
 `;
 
 const Left = styled.div`
@@ -23,26 +24,34 @@ const AllRecipesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  transition: 0.5s;
 `;
 
 const RecipeTitleWithImage = styled.div`
   display: flex;
   flex-direction: column;
-
+  word-wrap: break-word;
   width: 80vw;
   margin: 1rem 0;
+  transition: 0.5s;
 
   p {
-    font-size: x-large;
-    font-weight: bolder;
+    /* font-size: x-large;
+    font-weight: bolder; */
+  }
+
+  :hover {
+    cursor: pointer;
     color: ${colourPalette.primaryText};
+    text-decoration: underline;
   }
 `;
 
 const CurrentRecipeTitleWithImage = styled.div`
   display: flex;
   flex-direction: column;
-
+  transition: 0.5s;
   width: 80vw;
   margin: 1rem 0;
 
@@ -80,7 +89,6 @@ const CurrentRecipeContainer = styled.div`
     }
 
     ${Left} {
-      border: solid 10px black;
       width: 50%;
       margin: 0 1rem;
     }
@@ -88,7 +96,7 @@ const CurrentRecipeContainer = styled.div`
     ${Right} {
       display: flex;
       flex-wrap: wrap;
-      border: solid 10px black;
+
       width: 50%;
       margin: 0 1rem;
     }
@@ -101,7 +109,7 @@ export const CurrentRecipePage = (props) => {
       display={props.displayCurrentRecipe ? "flex" : "none"}
     >
       <Left>
-        <button onClick={props.backToRecipes}>Back to recipes</button>
+        <button onClick={props.backToRecipes}>Back to search</button>
         <CurrentRecipeTitleWithImage width="30vw">
           <p>{props.currentRecipe.title}</p>
           <img
@@ -121,16 +129,19 @@ export const CurrentRecipePage = (props) => {
 
         <Line />
         <p>Cooking Method:</p>
-        {props.currentRecipe.summary}
+        {/* {props.currentRecipe.summary} */}
+        <div
+          dangerouslySetInnerHTML={{ __html: props.currentRecipe.summary }}
+        />
       </Left>
       <Right>
         <AllRecipesContainer>
           {props.allRecipes.map((recipe) => {
-            if (props.currentRecipe !== 2) {
+            if (recipe.id !== props.currentRecipe.id) {
               return (
                 <RecipeTitleWithImage
                   width="10vw"
-                  onClick={() => this.handleGetRecipeById(recipe.id)}
+                  onClick={() => props.getRecipeById(recipe.id)}
                 >
                   <img src={recipe.image} alt={recipe.title} />
                   <p>{recipe.title}</p>
@@ -144,5 +155,5 @@ export const CurrentRecipePage = (props) => {
   );
 };
 
-/* {props.currentRecipe.summary &&
-        document.write(props.currentRecipe.summary)} */
+// props.currentRecipe.summary &&
+//     document.write(props.currentRecipe.summary)
