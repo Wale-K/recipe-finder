@@ -16,7 +16,7 @@ const RecipeTitleWithImage = styled.div`
   background-color: ${colourPalette.background};
 
   width: 60vw;
-  margin: 1rem 0;
+  margin: 1rem;
   img {
     width: 100%;
   }
@@ -52,6 +52,12 @@ const RecipesPageContainer = styled.div`
       cursor: pointer;
     }
   }
+
+  @media only screen and (min-width: 768px) {
+    ${RecipeTitleWithImage} {
+      width: 20vw;
+    }
+  }
 `;
 
 export class RecipesPage extends React.Component {
@@ -72,7 +78,7 @@ export class RecipesPage extends React.Component {
     if (this.state.allIngredients !== null) {
       axios
         .get(
-          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=a65ef70f2e914cbe86de0f39212ff030&ingredients=${this.state.allIngredients}`
+          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=a65ef70f2e914cbe86de0f39212ff030&number=12&ingredients=${this.state.allIngredients}`
         )
         .then((response) => {
           this.setState({
@@ -134,7 +140,6 @@ export class RecipesPage extends React.Component {
               >
                 <img src={recipe.image} alt={recipe.title} />
                 <p>{recipe.title}</p>
-                {console.log(recipe)}
               </RecipeTitleWithImage>
             );
           })}
@@ -143,6 +148,7 @@ export class RecipesPage extends React.Component {
           displayCurrentRecipe={this.state.displayCurrentRecipe}
           backToRecipes={this.handleBackToRecipes}
           currentRecipe={this.state.currentRecipe}
+          allRecipes={this.state.allRecipes}
         />
       </RecipesPageContainer>
     );
