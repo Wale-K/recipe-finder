@@ -123,7 +123,7 @@ export const CurrentRecipePage = (props) => {
         <p>You'll need:</p>
         {props.currentRecipe.extendedIngredients
           ? props.currentRecipe.extendedIngredients.map((ingredient) => {
-              return <p>{ingredient.original}</p>;
+              return <p key={ingredient.title}>{ingredient.original}</p>;
             })
           : ""}
 
@@ -142,6 +142,7 @@ export const CurrentRecipePage = (props) => {
                 <RecipeTitleWithImage
                   width="10vw"
                   onClick={() => props.getRecipeById(recipe.id)}
+                  key={recipe.title}
                 >
                   <img src={recipe.image} alt={recipe.title} />
                   <p>{recipe.title}</p>

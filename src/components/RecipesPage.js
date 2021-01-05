@@ -78,7 +78,14 @@ export class RecipesPage extends React.Component {
   };
 
   handleGetRecipes = () => {
-    if (this.state.allIngredients !== null) {
+    let noEmptyIngredients = true;
+    for (let i = 0; i < this.state.allIngredients.length; i++) {
+      if (this.state.allIngredients[i] === "") {
+        noEmptyIngredients = false;
+      }
+    }
+
+    if (this.state.allIngredients !== null && noEmptyIngredients) {
       axios
         .get(
           `https://api.spoonacular.com/recipes/findByIngredients?apiKey=a65ef70f2e914cbe86de0f39212ff030&number=12&ingredients=${this.state.allIngredients.join(
@@ -113,16 +120,28 @@ export class RecipesPage extends React.Component {
     });
   };
 
-  newInput = () => {
+  handleCreateNewInput = () => {
     this.setState((prevState) => {
-      return {
-        allIngredients: [...prevState.allIngredients, ""],
-      };
+      if (
+        prevState.allIngredients[prevState.allIngredients.length - 1] !== ""
+      ) {
+        return {
+          allIngredients: [...prevState.allIngredients, ""],
+        };
+      }
     });
   };
 
+  handleRemoveInput = () => {
+    if (this.state.allIngredients.length > 1) {
+      this.setState((prevState) => {
+        prevState.allIngredients.pop();
+        return { allIngredients: [...prevState.allIngredients] };
+      });
+    }
+  };
+
   render() {
-    console.log(this.state.currentRecipe);
     return (
       <RecipesPageContainer
         toggleDisplay={this.props.displayRecipe ? "flex" : "none"}
@@ -141,7 +160,7 @@ export class RecipesPage extends React.Component {
                   onChange={(event) => {
                     this.handleUpdateIngredients(event, index);
                   }}
-                  placeholder="Ham, Cheese"
+                  placeholder="Ham"
                 />
               );
             })}
@@ -152,7 +171,10 @@ export class RecipesPage extends React.Component {
               }}
               placeholder="Ham, Cheese"
             /> */}
-            <button onClick={this.newInput}>New Input</button>
+            <button onClick={this.handleCreateNewInput}>New Input</button>
+            <button onClick={this.handleRemoveInput}>
+              Remove Last Ingredient
+            </button>
             <button onClick={this.handleGetRecipes}>
               Use these ingredients!
             </button>
