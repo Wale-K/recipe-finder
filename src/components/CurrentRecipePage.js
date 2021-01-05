@@ -129,10 +129,10 @@ export const CurrentRecipePage = (props) => {
 
         <Line />
         <p>Cooking Method:</p>
-        {/* {props.currentRecipe.summary} */}
-        <div
+        {props.currentRecipe.summary}
+        {/* <div
           dangerouslySetInnerHTML={{ __html: props.currentRecipe.summary }}
-        />
+        /> */}
       </Left>
       <Right>
         <AllRecipesContainer>
@@ -157,3 +157,5 @@ export const CurrentRecipePage = (props) => {
 
 // props.currentRecipe.summary &&
 //     document.write(props.currentRecipe.summary)
+
+// use regex to strip the html tags and then render the strings as <p> tags instead?

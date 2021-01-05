@@ -62,23 +62,28 @@ const RecipesPageContainer = styled.div`
 
 export class RecipesPage extends React.Component {
   state = {
-    allIngredients: "",
+    allIngredients: [""],
     allRecipes: [],
     currentRecipe: {},
     displayCurrentRecipe: false,
   };
 
-  handleUpdateIngredients(event) {
-    this.setState({
-      allIngredients: event.target.value,
+  handleUpdateIngredients = (event, index) => {
+    this.setState((prevState) => {
+      prevState.allIngredients[index] = event.target.value;
+      return {
+        allIngredients: prevState.allIngredients,
+      };
     });
-  }
+  };
 
   handleGetRecipes = () => {
     if (this.state.allIngredients !== null) {
       axios
         .get(
-          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=a65ef70f2e914cbe86de0f39212ff030&number=12&ingredients=${this.state.allIngredients}`
+          `https://api.spoonacular.com/recipes/findByIngredients?apiKey=a65ef70f2e914cbe86de0f39212ff030&number=12&ingredients=${this.state.allIngredients.join(
+            ","
+          )}`
         )
         .then((response) => {
           this.setState({
@@ -108,7 +113,16 @@ export class RecipesPage extends React.Component {
     });
   };
 
+  newInput = () => {
+    this.setState((prevState) => {
+      return {
+        allIngredients: [...prevState.allIngredients, ""],
+      };
+    });
+  };
+
   render() {
+    console.log(this.state.currentRecipe);
     return (
       <RecipesPageContainer
         toggleDisplay={this.props.displayRecipe ? "flex" : "none"}
@@ -120,11 +134,25 @@ export class RecipesPage extends React.Component {
             Need a brief refresher? Click here to go back to the instructions.
           </span>
           <div>
-            <input
+            {this.state.allIngredients.map((ingredient, index) => {
+              return (
+                <input
+                  value={ingredient}
+                  onChange={(event) => {
+                    this.handleUpdateIngredients(event, index);
+                  }}
+                  placeholder="Ham, Cheese"
+                />
+              );
+            })}
+            {/* <input
               value={this.state.allIngredients}
-              onChange={this.handleUpdateIngredients.bind(this)}
+              onChange={(event) => {
+                this.handleUpdateIngredients(event, 0);
+              }}
               placeholder="Ham, Cheese"
-            />
+            /> */}
+            <button onClick={this.newInput}>New Input</button>
             <button onClick={this.handleGetRecipes}>
               Use these ingredients!
             </button>
