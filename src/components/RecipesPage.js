@@ -153,24 +153,20 @@ export class RecipesPage extends React.Component {
             Need a brief refresher? Click here to go back to the instructions.
           </span>
           <div>
-            {this.state.allIngredients.map((ingredient, index) => {
-              return (
-                <input
-                  value={ingredient}
-                  onChange={(event) => {
-                    this.handleUpdateIngredients(event, index);
-                  }}
-                  placeholder="Ham"
-                />
-              );
-            })}
-            {/* <input
-              value={this.state.allIngredients}
-              onChange={(event) => {
-                this.handleUpdateIngredients(event, 0);
-              }}
-              placeholder="Ham, Cheese"
-            /> */}
+            <div>
+              {this.state.allIngredients.map((ingredient, index) => {
+                return (
+                  <input
+                    value={ingredient}
+                    onChange={(event) => {
+                      this.handleUpdateIngredients(event, index);
+                    }}
+                    placeholder="Ham"
+                  />
+                );
+              })}
+            </div>
+
             <button onClick={this.handleCreateNewInput}>New Input</button>
             <button onClick={this.handleRemoveInput}>
               Remove Last Ingredient
