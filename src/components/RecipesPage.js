@@ -33,6 +33,14 @@ const RecipeTitleWithImage = styled.div`
   }
 `;
 
+const InputsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  input {
+    margin: 0.5rem;
+  }
+`;
+
 const IngredientsSearchDiv = styled.div`
   display: ${(props) => props.display};
   flex-direction: column;
@@ -153,7 +161,7 @@ export class RecipesPage extends React.Component {
             Need a brief refresher? Click here to go back to the instructions.
           </span>
           <div>
-            <div>
+            <InputsDiv>
               {this.state.allIngredients.map((ingredient, index) => {
                 return (
                   <input
@@ -165,7 +173,7 @@ export class RecipesPage extends React.Component {
                   />
                 );
               })}
-            </div>
+            </InputsDiv>
 
             <button onClick={this.handleCreateNewInput}>New Input</button>
             <button onClick={this.handleRemoveInput}>

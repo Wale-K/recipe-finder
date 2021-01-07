@@ -10,9 +10,7 @@ const Line = styled.div`
 `;
 
 const Left = styled.div`
-  img {
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 const Right = styled.div`
@@ -31,7 +29,7 @@ const AllRecipesContainer = styled.div`
 const RecipeTitleWithImage = styled.div`
   display: flex;
   flex-direction: column;
-  word-wrap: break-word;
+
   width: 80vw;
   margin: 1rem 0;
   transition: 0.5s;
@@ -55,6 +53,10 @@ const CurrentRecipeTitleWithImage = styled.div`
   width: 80vw;
   margin: 1rem 0;
 
+  img {
+    margin: 0 auto;
+  }
+
   p {
     font-size: x-large;
     font-weight: bolder;
@@ -64,12 +66,11 @@ const CurrentRecipeTitleWithImage = styled.div`
 
 const CurrentRecipeContainer = styled.div`
   display: ${(props) => props.display};
-
+  word-wrap: break-word;
   width: 100%;
 
   img {
-    width: 80vw;
-    margin: 0 auto;
+    width: calc(100vw - 4rem);
   }
 
   @media only screen and (min-width: 768px) {
@@ -130,9 +131,6 @@ export const CurrentRecipePage = (props) => {
         <Line />
         <p>Cooking Method:</p>
         {props.currentRecipe.summary}
-        {/* <div
-          dangerouslySetInnerHTML={{ __html: props.currentRecipe.summary }}
-        /> */}
       </Left>
       <Right>
         <AllRecipesContainer>
