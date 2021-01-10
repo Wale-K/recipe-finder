@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { colourPalette } from "../utilities";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from "react-html-parser";
 
 const Line = styled.div`
   width: 95%;
@@ -62,6 +67,10 @@ const CurrentRecipeTitleWithImage = styled.div`
     font-weight: bolder;
     color: ${colourPalette.primaryText};
   }
+`;
+
+const CookingMethodDiv = styled.div`
+  line-height: 2rem;
 `;
 
 const CurrentRecipeContainer = styled.div`
@@ -130,7 +139,9 @@ export const CurrentRecipePage = (props) => {
 
         <Line />
         <p>Cooking Method:</p>
-        {props.currentRecipe.summary}
+        <CookingMethodDiv>
+          {ReactHtmlParser(props.currentRecipe.summary)}
+        </CookingMethodDiv>
       </Left>
       <Right>
         <AllRecipesContainer>
