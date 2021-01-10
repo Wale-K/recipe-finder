@@ -14,7 +14,7 @@ const Section = styled.div`
     width: 10vw;
     height: 5vh;
     align-self: ${(props) => props.align};
-    color: ${colourPalette.secondaryText};
+    color: ${colourPalette.lightOrange};
   }
 
   input {
@@ -24,8 +24,7 @@ const Section = styled.div`
 `;
 
 const Title = styled.h1`
-  color: ${colourPalette.primaryText};
-  background-color: ${colourPalette.background};
+  color: ${colourPalette.darkOrange};
 `;
 
 const Arrows = styled.div`
@@ -35,13 +34,20 @@ const Arrows = styled.div`
 
 const LandingPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
+  color: ${colourPalette.darkBlue};
+
+  input {
+    color: ${colourPalette.darkBlue};
+    /* background-color: ${colourPalette.darkBlue}; */
+    background-color: white;
+  }
 
   flex-direction: column;
-  background-color: ${colourPalette.background};
+  background-color: ${colourPalette.lightBlue};
   height: 100vh;
 
   span {
-    color: ${colourPalette.secondaryText};
+    color: ${colourPalette.test};
     :hover {
       cursor: pointer;
     }
@@ -97,7 +103,7 @@ export class LandingPage extends React.Component {
           background="linear-gradient(30deg, #465e4f, #384b3f)"
         >
           <Title>Recipe Finder</Title>
-          <p>Hello friend.</p>
+          <p>Hello Chef!</p>
           <p>
             If you're looking for some inspiration for your next meal then
             you've come to the right place.

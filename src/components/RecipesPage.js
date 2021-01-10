@@ -13,8 +13,8 @@ const AllRecipesContainer = styled.div`
 const RecipeTitleWithImage = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${colourPalette.background};
-
+  background-color: white;
+  color: ${colourPalette.darkBlue};
   width: 60vw;
   margin: 1rem;
   img {
@@ -28,7 +28,7 @@ const RecipeTitleWithImage = styled.div`
     cursor: pointer;
     p {
       text-decoration: underline;
-      color: ${colourPalette.primaryText};
+      color: ${colourPalette.darkOrange};
     }
   }
 `;
@@ -49,12 +49,12 @@ const IngredientsSearchDiv = styled.div`
 const RecipesPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
-  background-color: ${colourPalette.highlight};
+  background-color: ${colourPalette.lightOrange};
   min-height: 100vh;
   padding: 2rem;
 
   span {
-    color: ${colourPalette.secondaryText};
+    color: white;
     margin-bottom: 2rem;
     :hover {
       cursor: pointer;

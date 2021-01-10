@@ -1,4 +1,11 @@
 export const colourPalette = {
+  darkBlue: "#023058",
+  lightBlue: "#b2d6e1",
+  grey: "#a9a9a9",
+  lightOrange: "#eab07e",
+  darkOrange: "#df5901",
+  test: "#559aa9",
+  testting: "#ffe0b3",
   primaryText: "#386737",
   secondaryText: "#017d18",
   text: "#3a3a3a",
