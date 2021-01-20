@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { colourPalette, rightArrow, leftArrow } from "../utilities";
-import food from "../images/food.jpeg";
-import foodie from "../images/foodie.jpeg";
 
 const Section = styled.div`
   display: ${(props) => props.toggleDisplay};
@@ -10,7 +8,7 @@ const Section = styled.div`
   justify-content: space-between;
   margin: ${(props) => props.margin};
   padding: 2rem;
-  height: calc(100vh - 2rem);
+  height: calc(70vh - 4rem);
 
   svg {
     width: 10vw;
@@ -34,25 +32,17 @@ const Arrows = styled.div`
   justify-content: space-between;
 `;
 
-const PictureBanner = styled.div`
-  background-image: url(${(props) => props.image});
-  height: 25vh;
-  background-size: 100% 100%;
-`;
-
 const LandingPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   color: ${colourPalette.darkBlue};
 
   input {
     color: ${colourPalette.darkBlue};
-    /* background-color: ${colourPalette.darkBlue}; */
     background-color: white;
   }
 
   flex-direction: column;
   background-color: ${colourPalette.lightBlue};
-  height: 70vh;
 
   span {
     color: ${colourPalette.bluey};
@@ -64,8 +54,10 @@ const LandingPageContainer = styled.div`
   @media only screen and (min-width: 768px) {
     ${Section} {
       padding: 4rem;
-      height: calc(100vh - 4rem);
+      height: calc(70vh - 8rem);
+      width: 50vw;
     }
+
     input {
       width: 40vw;
     }
@@ -105,7 +97,6 @@ export class LandingPage extends React.Component {
       <LandingPageContainer
         toggleDisplay={this.props.displayLandingPage ? "flex" : "none"}
       >
-        {/* <PictureBanner image={foodie} /> */}
         <Section
           toggleDisplay={this.state.introDisplay ? "flex" : "none"}
           align="flex-end"
@@ -137,7 +128,7 @@ export class LandingPage extends React.Component {
             <p>Your name is "{this.state.userName}"? That's a cool name!</p>
           )}
           <p>
-            Well {this.state.userName ? this.state.userName : "friend"}, to use
+            Well {this.state.userName ? this.state.userName : "Chef"}, to use
             this site all you need to do is enter your ingredients in the input
             fields on the next page. Please seperate your ingredients with
             commas. There's an exmple you can see on the next page.
@@ -155,7 +146,6 @@ export class LandingPage extends React.Component {
             <svg onClick={this.props.skipInstructions}>{rightArrow}</svg>
           </Arrows>
         </Section>
-        {/* <PictureBanner image={food} /> */}
       </LandingPageContainer>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colourPalette } from "../utilities";
+import { colourPalette, leftArrow } from "../utilities";
 import ReactHtmlParser, {
   processNodes,
   convertNodeToElement,
@@ -16,6 +16,13 @@ const Line = styled.div`
 
 const Left = styled.div`
   width: 100%;
+  div:first-child {
+    display: flex;
+
+    span {
+      margin: auto 0;
+    }
+  }
 `;
 
 const Right = styled.div`
@@ -78,6 +85,11 @@ const CurrentRecipeContainer = styled.div`
   word-wrap: break-word;
   width: 100%;
   color: ${colourPalette.darkBlue};
+
+  svg {
+    margin: 0 1rem 0 0;
+  }
+
   img {
     width: calc(100vw - 4rem);
   }
@@ -119,7 +131,10 @@ export const CurrentRecipePage = (props) => {
       display={props.displayCurrentRecipe ? "flex" : "none"}
     >
       <Left>
-        <button onClick={props.backToRecipes}>Back to search</button>
+        <div onClick={props.backToRecipes}>
+          <svg>{leftArrow}</svg>
+          <span>Back to Recipes search</span>
+        </div>
         <CurrentRecipeTitleWithImage width="30vw">
           <p>{props.currentRecipe.title}</p>
           <img
@@ -139,7 +154,7 @@ export const CurrentRecipePage = (props) => {
           : ""}
 
         <Line />
-        <p>Cooking Method:</p>
+        <p>Recipe Information:</p>
         <CookingMethodDiv>
           {ReactHtmlParser(props.currentRecipe.summary)}
         </CookingMethodDiv>

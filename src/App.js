@@ -10,6 +10,11 @@ const PictureBanner = styled.div`
   background-image: url(${(props) => props.image});
   height: 15vh;
   background-size: 100% 100%;
+
+  @media only screen and (min-width: 768px) {
+    height: 30vh;
+    display: ${(props) => props.display};
+  }
 `;
 
 class App extends React.Component {
@@ -39,7 +44,7 @@ class App extends React.Component {
           displayRecipe={this.state.displayRecipe}
           skipInstructions={this.handleSkipInstructions}
         />
-        <PictureBanner image={food} />
+        <PictureBanner image={food} display="none" />
       </>
     );
   }

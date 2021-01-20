@@ -1,21 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { colourPalette } from "../utilities";
+import { colourPalette, search, plus, minus } from "../utilities";
 import { CurrentRecipePage } from "./CurrentRecipePage";
 import axios from "axios";
-import food from "../images/food.jpeg";
-import foodie from "../images/foodie.jpeg";
 
 const AllRecipesContainer = styled.div`
   display: ${(props) => props.display};
   flex-wrap: wrap;
   justify-content: center;
-`;
-
-const PictureBanner = styled.div`
-  background-image: url(${(props) => props.image});
-  height: 25vh;
-  background-size: 100% 100%;
 `;
 
 const InputAndSubmit = styled.div`
@@ -64,7 +56,10 @@ const InputsDiv = styled.div`
   display: flex;
   flex-direction: column;
   input {
-    margin: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: ${colourPalette.lightOrange};
+    color: ${colourPalette.darkBlue};
+    width: 60vw;
   }
 `;
 
@@ -81,6 +76,13 @@ const RecipesPageContainer = styled.div`
   overflow: scroll;
   padding: 2rem;
 
+  svg {
+    height: 2rem;
+    width: 2rem;
+    color: ${colourPalette.darkOrange};
+    margin-bottom: 1rem;
+  }
+
   span {
     color: ${colourPalette.bluey};
     margin-bottom: 2rem;
@@ -92,6 +94,14 @@ const RecipesPageContainer = styled.div`
   @media only screen and (min-width: 768px) {
     ${RecipeTitleWithImage} {
       width: 20vw;
+    }
+
+    input {
+      width: 40vw;
+    }
+
+    ${InputAndSubmit}, ${CreateRemoveInputs} {
+      width: 50vw;
     }
   }
 `;
@@ -202,11 +212,11 @@ export class RecipesPage extends React.Component {
                 );
               })}
             </InputsDiv>
-            <button onClick={this.handleGetRecipes}>GO!</button>
+            <svg onClick={this.handleGetRecipes}>{search}</svg>
           </InputAndSubmit>
           <CreateRemoveInputs>
-            <button onClick={this.handleRemoveInput}>-</button>
-            <button onClick={this.handleCreateNewInput}>+</button>
+            <svg onClick={this.handleRemoveInput}>{minus}</svg>
+            <svg onClick={this.handleCreateNewInput}>{plus}</svg>
           </CreateRemoveInputs>
         </IngredientsSearchDiv>
         <AllRecipesContainer
