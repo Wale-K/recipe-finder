@@ -3,11 +3,38 @@ import styled from "styled-components";
 import { colourPalette } from "../utilities";
 import { CurrentRecipePage } from "./CurrentRecipePage";
 import axios from "axios";
+import food from "../images/food.jpeg";
+import foodie from "../images/foodie.jpeg";
 
 const AllRecipesContainer = styled.div`
   display: ${(props) => props.display};
   flex-wrap: wrap;
   justify-content: center;
+`;
+
+const PictureBanner = styled.div`
+  background-image: url(${(props) => props.image});
+  height: 25vh;
+  background-size: 100% 100%;
+`;
+
+const InputAndSubmit = styled.div`
+  display: flex;
+  justify-content: space-between;
+  button {
+    height: 2rem;
+    width: 4rem;
+    align-self: flex-start;
+    margin: 0.5rem;
+  }
+`;
+
+const CreateRemoveInputs = styled.div`
+  display: flex;
+  justify-content: space-between;
+  button {
+    margin: 0.5rem;
+  }
 `;
 
 const RecipeTitleWithImage = styled.div`
@@ -49,12 +76,13 @@ const IngredientsSearchDiv = styled.div`
 const RecipesPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   flex-direction: column;
-  background-color: ${colourPalette.lightOrange};
-  min-height: 100vh;
+  background-color: ${colourPalette.lightBlue};
+  height: calc(70vh - 4rem);
+  overflow: scroll;
   padding: 2rem;
 
   span {
-    color: white;
+    color: ${colourPalette.bluey};
     margin-bottom: 2rem;
     :hover {
       cursor: pointer;
@@ -160,7 +188,7 @@ export class RecipesPage extends React.Component {
           <span onClick={this.props.skipInstructions}>
             Need a brief refresher? Click here to go back to the instructions.
           </span>
-          <div>
+          <InputAndSubmit>
             <InputsDiv>
               {this.state.allIngredients.map((ingredient, index) => {
                 return (
@@ -169,20 +197,17 @@ export class RecipesPage extends React.Component {
                     onChange={(event) => {
                       this.handleUpdateIngredients(event, index);
                     }}
-                    placeholder="Ham"
+                    placeholder={`Ingredient ${index + 1}`}
                   />
                 );
               })}
             </InputsDiv>
-
-            <button onClick={this.handleCreateNewInput}>New Input</button>
-            <button onClick={this.handleRemoveInput}>
-              Remove Last Ingredient
-            </button>
-            <button onClick={this.handleGetRecipes}>
-              Use these ingredients!
-            </button>
-          </div>
+            <button onClick={this.handleGetRecipes}>GO!</button>
+          </InputAndSubmit>
+          <CreateRemoveInputs>
+            <button onClick={this.handleRemoveInput}>-</button>
+            <button onClick={this.handleCreateNewInput}>+</button>
+          </CreateRemoveInputs>
         </IngredientsSearchDiv>
         <AllRecipesContainer
           display={this.state.displayCurrentRecipe ? "none" : "flex"}

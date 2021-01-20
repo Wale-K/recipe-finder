@@ -10,7 +10,7 @@ import ReactHtmlParser, {
 const Line = styled.div`
   width: 95%;
   height: 2px;
-  background-color: ${colourPalette.primaryText};
+  background-color: ${colourPalette.darkOrange};
   margin: 0 auto;
 `;
 
@@ -65,7 +65,7 @@ const CurrentRecipeTitleWithImage = styled.div`
   p {
     font-size: x-large;
     font-weight: bolder;
-    color: ${colourPalette.primaryText};
+    color: ${colourPalette.darkOrange};
   }
 `;
 
@@ -77,7 +77,7 @@ const CurrentRecipeContainer = styled.div`
   display: ${(props) => props.display};
   word-wrap: break-word;
   width: 100%;
-
+  color: ${colourPalette.darkBlue};
   img {
     width: calc(100vw - 4rem);
   }
@@ -130,6 +130,7 @@ export const CurrentRecipePage = (props) => {
         <p>Cooking Time: {props.currentRecipe.readyInMinutes} minutes</p>
         <p>Servings: {props.currentRecipe.servings}</p>
         <Line />
+
         <p>You'll need:</p>
         {props.currentRecipe.extendedIngredients
           ? props.currentRecipe.extendedIngredients.map((ingredient) => {

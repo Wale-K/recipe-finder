@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { colourPalette, rightArrow, leftArrow } from "../utilities";
+import food from "../images/food.jpeg";
+import foodie from "../images/foodie.jpeg";
 
 const Section = styled.div`
   display: ${(props) => props.toggleDisplay};
@@ -14,7 +16,7 @@ const Section = styled.div`
     width: 10vw;
     height: 5vh;
     align-self: ${(props) => props.align};
-    color: ${colourPalette.lightOrange};
+    color: ${colourPalette.darkOrange};
   }
 
   input {
@@ -32,6 +34,12 @@ const Arrows = styled.div`
   justify-content: space-between;
 `;
 
+const PictureBanner = styled.div`
+  background-image: url(${(props) => props.image});
+  height: 25vh;
+  background-size: 100% 100%;
+`;
+
 const LandingPageContainer = styled.div`
   display: ${(props) => props.toggleDisplay};
   color: ${colourPalette.darkBlue};
@@ -44,10 +52,10 @@ const LandingPageContainer = styled.div`
 
   flex-direction: column;
   background-color: ${colourPalette.lightBlue};
-  height: 100vh;
+  height: 70vh;
 
   span {
-    color: ${colourPalette.test};
+    color: ${colourPalette.bluey};
     :hover {
       cursor: pointer;
     }
@@ -97,6 +105,7 @@ export class LandingPage extends React.Component {
       <LandingPageContainer
         toggleDisplay={this.props.displayLandingPage ? "flex" : "none"}
       >
+        {/* <PictureBanner image={foodie} /> */}
         <Section
           toggleDisplay={this.state.introDisplay ? "flex" : "none"}
           align="flex-end"
@@ -146,7 +155,10 @@ export class LandingPage extends React.Component {
             <svg onClick={this.props.skipInstructions}>{rightArrow}</svg>
           </Arrows>
         </Section>
+        {/* <PictureBanner image={food} /> */}
       </LandingPageContainer>
     );
   }
 }
+
+// Add a banner of pictures of food to the pages?

@@ -12,6 +12,8 @@ export const colourPalette = {
   background: "#eee",
   primary: "#993d00",
   highlight: "#cde9bf",
+  white: "white",
+  bluey: "#2028ed",
 };
 
 export const rightArrow = (
